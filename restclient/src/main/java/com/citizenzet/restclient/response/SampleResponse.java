@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
+ * zxcvzxc
  * Response class for Sample model
  *
  * @author citizenzet
