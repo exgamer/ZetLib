@@ -2,12 +2,13 @@ package com.citizenzet.restclient.service;
 
 import android.util.Log;
 import com.citizenzet.restclient.api.SampleApiService;
+import com.citizenzet.restclient.model.pack.SamplePack;
 import com.google.gson.Gson;
 import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class SampleService2 extends BaseRestService2{
+public class SampleService2 extends BaseRestService2<SamplePack>{
 
     @Override
     protected Call getCaller(Retrofit retrofit) {
