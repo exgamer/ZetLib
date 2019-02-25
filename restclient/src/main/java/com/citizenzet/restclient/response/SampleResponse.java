@@ -1,5 +1,6 @@
 package com.citizenzet.restclient.response;
 
+import com.citizenzet.restclient.model.BaseRestModel;
 import com.citizenzet.restclient.model.Sample;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author citizenzet
  */
-public class SampleResponse {
+public class SampleResponse extends BaseRestModel {
 
     @SerializedName("page")
     private int page;
