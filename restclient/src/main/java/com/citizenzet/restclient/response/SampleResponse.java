@@ -17,8 +17,8 @@ public class SampleResponse extends BaseRestModel {
     @SerializedName("page")
     private int page;
 
-    @SerializedName("results")
-    private List<Sample> results;
+    @SerializedName("models")
+    private List<Sample> models;
 
     @SerializedName("total_results")
     private int totalResults;
@@ -34,12 +34,12 @@ public class SampleResponse extends BaseRestModel {
         this.page = page;
     }
 
-    public List<Sample> getResults() {
-        return results;
+    public List<Sample> getModels() {
+        return models;
     }
 
-    public void setResults(List<Sample> results) {
-        this.results = results;
+    public void setModels(List<Sample> models) {
+        this.models = models;
     }
 
     public int getTotalResults() {

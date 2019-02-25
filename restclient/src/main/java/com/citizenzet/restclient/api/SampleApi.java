@@ -9,8 +9,8 @@ import retrofit2.http.GET;
  *
  * @author citizenzet
  */
-public interface SampleApi extends BaseRestApi{
+public interface SampleApi{
 
     @GET("api/post/list")
-    Call<SampleResponse> getSamplesList();
+    Call<SampleResponse> list();
 }

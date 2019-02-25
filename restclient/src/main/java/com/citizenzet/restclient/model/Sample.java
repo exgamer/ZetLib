@@ -12,15 +12,15 @@ public class Sample extends BaseRestModel{
     @SerializedName("id")
     private int id;
 
-    @SerializedName("create_date")
-    private String createDate;
+    @SerializedName("created_at")
+    private String createdAt;
 
     @SerializedName("text")
     private String text;
 
-    public Sample(int id, String createDate, String text) {
+    public Sample(int id, String createdAt, String text) {
         this.id = id;
-        this.createDate = createDate;
+        this.createdAt = createdAt;
         this.text = text;
     }
 
@@ -32,12 +32,12 @@ public class Sample extends BaseRestModel{
         this.id = id;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getText() {
