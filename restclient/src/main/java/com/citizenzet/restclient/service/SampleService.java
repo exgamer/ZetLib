@@ -3,42 +3,47 @@ package com.citizenzet.restclient.service;
 import android.util.Log;
 
 import com.citizenzet.restclient.api.SampleApiService;
+import com.citizenzet.restclient.model.Sample;
 import com.citizenzet.restclient.model.pack.SamplePack;
 import com.google.gson.Gson;
+
+import java.util.List;
+
+import okhttp3.Headers;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class SampleService extends BaseRestService {
+public class SampleService extends BaseRestService<SamplePack> {
 
-    /**
-     * execute request
-     */
-    public void request(){
-        Retrofit retrofit = getBuilder();
+    @Override
+    protected Call getCaller(Retrofit retrofit) {
         SampleApiService api = retrofit.create(SampleApiService.class);
-        Call<SamplePack> call = api.list();
-
-        call.enqueue(new Callback<SamplePack>() {
-            @Override
-            public void onResponse(Call<SamplePack> call, Response<SamplePack> response) {
-                Log.e("!!!!","SUCESS");
-                Object samples = response.body();
-                Gson gson = new Gson();
-                String json = gson.toJson(samples);
-                Log.e("!!!!",json);
-            }
-            @Override
-            public void onFailure(Call<SamplePack> call, Throwable throwable) {
-                Log.e("!!!!", throwable.toString());
-            }
-        });
+        return api.list();
     }
-
 
     @Override
     protected String getBaseUrl() {
         return "http://concepture.club";
+    }
+
+    @Override
+    protected void onCallResponse(int code, Headers headers, Object body) {
+        Log.e("!!!!","SUCCESS");
+        Log.e("!!!! code",String.valueOf(code));
+        Log.e("!!!! headers",headers.toString());
+        SamplePack sp = (SamplePack) body;
+        List<Sample> list = sp.getModels();
+
+
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+
+
+        Log.e("!!!!",json);
+    }
+
+    @Override
+    protected void onCallFailure(Throwable throwable) {
+        Log.e("!!!!", throwable.toString());
     }
 }

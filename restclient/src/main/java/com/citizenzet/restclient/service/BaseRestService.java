@@ -1,14 +1,34 @@
 package com.citizenzet.restclient.service;
 
+import okhttp3.Headers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Base rest service
- *
- * @author citizenzet
- */
-public abstract class BaseRestService {
+public abstract class BaseRestService<M> {
+
+
+    public void request(){
+        Retrofit retrofit = getBuilder();
+        Call<M> call = getCaller(retrofit);
+        call.enqueue(new Callback<M>() {
+            @Override
+            public void onResponse(Call<M> call, Response<M> response) {
+                Object body = response.body();
+                Headers headers = response.headers();
+                int code = response.code();
+                onCallResponse(code, headers, body);
+            }
+            @Override
+            public void onFailure(Call<M> call, Throwable throwable) {
+                onCallFailure(throwable);
+            }
+        });
+    }
+
+    protected abstract Call<M> getCaller(Retrofit retrofit);
 
 
     /**
@@ -18,9 +38,9 @@ public abstract class BaseRestService {
      */
     protected Retrofit getBuilder()  {
         return new Retrofit.Builder()
-            .baseUrl(getBaseUrl())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+                .baseUrl(getBaseUrl())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 
     /**
@@ -30,5 +50,7 @@ public abstract class BaseRestService {
      */
     protected abstract String getBaseUrl();
 
-    public abstract void request();
+    protected abstract void onCallResponse(int code, Headers headers, Object body);
+    protected abstract void onCallFailure(Throwable throwable);
+
 }
