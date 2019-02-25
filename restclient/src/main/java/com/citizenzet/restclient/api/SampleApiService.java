@@ -1,6 +1,6 @@
 package com.citizenzet.restclient.api;
 
-import com.citizenzet.restclient.response.SampleResponse;
+import com.citizenzet.restclient.model.pack.SamplePack;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -9,8 +9,8 @@ import retrofit2.http.GET;
  *
  * @author citizenzet
  */
-public interface SampleApi{
+public interface SampleApiService {
 
     @GET("api/post/list")
-    Call<SampleResponse> list();
+    Call<SamplePack> list();
 }

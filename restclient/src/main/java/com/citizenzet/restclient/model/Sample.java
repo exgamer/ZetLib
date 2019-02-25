@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author citizenzet
  */
-public class Sample extends BaseRestModel{
+public class Sample {
 
     @SerializedName("id")
     private int id;
