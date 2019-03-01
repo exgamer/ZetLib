@@ -2,6 +2,7 @@ package com.citizenzet.restclient.service;
 
 import android.app.Activity;
 
+import com.citizenzet.restclient.activity.BaseRestActivity;
 import com.citizenzet.restclient.fragment.BaseRestFragment;
 
 import okhttp3.Headers;
@@ -13,8 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public abstract class BaseRestService<M> {
     protected BaseRestFragment fragment;
+    protected BaseRestActivity activity;
 
-    public void setActivity(BaseRestFragment fragment){
+    public void setFragment(BaseRestFragment fragment){
         this.fragment = fragment;
     }
 
@@ -23,7 +25,11 @@ public abstract class BaseRestService<M> {
     }
 
     public Activity getActivity(){
-        return getFragment().getActivity();
+        return this.activity;
+    }
+
+    public void setActivity(BaseRestActivity activity){
+        this.activity = activity;
     }
 
     public void request(){
