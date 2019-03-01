@@ -1,6 +1,8 @@
 package com.citizenzet.restclient.service;
 
-import com.citizenzet.restclient.activity.BaseRestActivity;
+import android.app.Activity;
+
+import com.citizenzet.restclient.fragment.BaseRestFragment;
 
 import okhttp3.Headers;
 import retrofit2.Call;
@@ -10,14 +12,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public abstract class BaseRestService<M> {
-    protected BaseRestActivity activity;
+    protected BaseRestFragment fragment;
 
-    public void setActivity(BaseRestActivity activity){
-        this.activity = activity;
+    public void setActivity(BaseRestFragment fragment){
+        this.fragment = fragment;
     }
 
-    public BaseRestActivity getActivity(){
-        return this.activity;
+    public BaseRestFragment getFragment(){
+        return this.fragment;
+    }
+
+    public Activity getActivity(){
+        return getFragment().getActivity();
     }
 
     public void request(){
@@ -29,11 +35,11 @@ public abstract class BaseRestService<M> {
                 Object body = response.body();
                 Headers headers = response.headers();
                 int code = response.code();
-                onCallResponse(code, headers, body, getActivity());
+                onCallResponse(code, headers, body);
             }
             @Override
             public void onFailure(Call<M> call, Throwable throwable) {
-                onCallFailure(throwable, getActivity());
+                onCallFailure(throwable);
             }
         });
     }
@@ -60,7 +66,7 @@ public abstract class BaseRestService<M> {
      */
     protected abstract String getBaseUrl();
 
-    protected abstract void onCallResponse(int code, Headers headers, Object body, BaseRestActivity activity);
-    protected abstract void onCallFailure(Throwable throwable, BaseRestActivity activity);
+    protected abstract void onCallResponse(int code, Headers headers, Object body);
+    protected abstract void onCallFailure(Throwable throwable);
 
 }
