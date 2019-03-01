@@ -35,6 +35,11 @@ public class SampleService extends BaseRestService<SamplePack> {
         SamplePack sp = (SamplePack) body;
         List<Sample> list = sp.getModels();
 
+        // пример использования адаптера
+//        Log.e("!!!!",String.valueOf(list.size()));
+//        RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.sample_layout);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+//        recyclerView.setAdapter(new SampleAdapter(list, R.layout.recycler_view_item, activity.getApplicationContext()));
 
         Gson gson = new Gson();
         String json = gson.toJson(list);
