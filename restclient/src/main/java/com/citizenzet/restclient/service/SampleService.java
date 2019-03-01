@@ -2,6 +2,7 @@ package com.citizenzet.restclient.service;
 
 import android.util.Log;
 
+import com.citizenzet.restclient.activity.BaseRestActivity;
 import com.citizenzet.restclient.api.SampleApiService;
 import com.citizenzet.restclient.model.Sample;
 import com.citizenzet.restclient.model.pack.SamplePack;
@@ -27,7 +28,7 @@ public class SampleService extends BaseRestService<SamplePack> {
     }
 
     @Override
-    protected void onCallResponse(int code, Headers headers, Object body) {
+    protected void onCallResponse(int code, Headers headers, Object body, BaseRestActivity activity) {
         Log.e("!!!!","SUCCESS");
         Log.e("!!!! code",String.valueOf(code));
         Log.e("!!!! headers",headers.toString());
@@ -43,7 +44,7 @@ public class SampleService extends BaseRestService<SamplePack> {
     }
 
     @Override
-    protected void onCallFailure(Throwable throwable) {
+    protected void onCallFailure(Throwable throwable, BaseRestActivity activity) {
         Log.e("!!!!", throwable.toString());
     }
 }
