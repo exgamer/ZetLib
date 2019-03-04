@@ -32,6 +32,14 @@ public abstract class BaseRestService<M> {
         this.activity = activity;
     }
 
+    public void init(BaseRestActivity activity){
+        setActivity(activity);
+    };
+
+    public void init(BaseRestFragment fragment){
+        setFragment(fragment);
+    };
+
     public void request(){
         Retrofit retrofit = getBuilder();
         Call<M> call = getCaller(retrofit);
