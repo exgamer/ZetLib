@@ -18,7 +18,7 @@ public class SampleService extends BaseListService<SamplePack> {
     @Override
     protected Call getCaller(Retrofit retrofit, int page) {
         SampleApiService api = retrofit.create(SampleApiService.class);
-        return api.list();
+        return api.list(page);
     }
 
     @Override
