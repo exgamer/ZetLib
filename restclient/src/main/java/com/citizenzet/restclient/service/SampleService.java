@@ -13,10 +13,10 @@ import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class SampleService extends BaseRestService<SamplePack> {
+public class SampleService extends BaseListService<SamplePack> {
 
     @Override
-    protected Call getCaller(Retrofit retrofit) {
+    protected Call getCaller(Retrofit retrofit, int page) {
         SampleApiService api = retrofit.create(SampleApiService.class);
         return api.list();
     }

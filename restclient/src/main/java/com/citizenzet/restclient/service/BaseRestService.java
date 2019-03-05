@@ -32,6 +32,13 @@ public abstract class BaseRestService<M> {
         this.activity = activity;
     }
 
+    public Activity getFragmentActivity(){
+        if (this.fragment == null){
+            return null;
+        }
+        return this.fragment.getActivity();
+    }
+
     public void init(BaseRestActivity activity){
         setActivity(activity);
     };
