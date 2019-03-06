@@ -1,6 +1,7 @@
 package com.citizenzet.restclient.fragment;
 
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -15,6 +16,13 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
     protected T activity;
     protected V binding;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity=(T)getActivity();
+        init();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,6 +32,8 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
     }
 
     public abstract int layout();
+
+    public abstract void init();
 
     public void afterBinding(){
 
