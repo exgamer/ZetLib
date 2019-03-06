@@ -32,7 +32,27 @@ public abstract class BaseRestService<M> {
         this.activity = activity;
     }
 
+    public Activity getFragmentActivity(){
+        if (this.fragment == null){
+            return null;
+        }
+        return this.fragment.getActivity();
+    }
+
+    public void init(BaseRestActivity activity){
+        setActivity(activity);
+    };
+
+    public void init(BaseRestFragment fragment){
+        setFragment(fragment);
+    };
+
+    public void beforeRequest(){
+
+    }
+
     public void request(){
+        beforeRequest();
         Retrofit retrofit = getBuilder();
         Call<M> call = getCaller(retrofit);
         call.enqueue(new Callback<M>() {
@@ -48,6 +68,11 @@ public abstract class BaseRestService<M> {
                 onCallFailure(throwable);
             }
         });
+        afterRequest();
+    }
+
+    public void afterRequest(){
+
     }
 
     protected abstract Call<M> getCaller(Retrofit retrofit);

@@ -1,4 +1,4 @@
-//package com.citizenzet.restclient.adapter;
+//package com.citizenzet.myapplication.adapter;
 //
 //import android.content.Context;
 //import android.support.v7.widget.RecyclerView;
@@ -6,40 +6,44 @@
 //import android.view.View;
 //import android.view.ViewGroup;
 //import android.widget.ImageView;
-//import android.widget.LinearLayout;
 //import android.widget.TextView;
 //
 //import com.citizenzet.myapplication.R;
 //import com.citizenzet.restclient.model.Sample;
 //import com.squareup.picasso.Picasso;
 //
+//import java.util.ArrayList;
+//import java.util.Collection;
 //import java.util.List;
 //
 //public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.SampleViewHolder> {
 //
-//    private List<Sample> items;
-//
-//    private int rowLayout;
+//    private List<Sample> items = new ArrayList<>();
 //
 //    private Context context;
 //
 //    public static final String IMAGE_URL_BASE_PATH="http://concepture.club";
 //
-//    public SampleAdapter(List<Sample> items, int rowLayout, Context context) {
-//
-//        this.items = items;
-//
-//        this.rowLayout = rowLayout;
+//    public SampleAdapter(Context context) {
 //
 //        this.context = context;
 //
+//    }
+//
+//    public void setItems(Collection<Sample> tweets) {
+//        items.addAll(tweets);
+//        notifyDataSetChanged();
+//    }
+//
+//    public void clearItems() {
+//        items.clear();
+//        notifyDataSetChanged();
 //    }
 //
 ////A view holder inner class where we get reference to the views in the layout using their ID
 //
 //    public static class SampleViewHolder extends RecyclerView.ViewHolder {
 //
-//        LinearLayout sampleLayout;
 //
 //        TextView text;
 //
@@ -50,7 +54,6 @@
 //
 //            super(v);
 //
-//            sampleLayout = (LinearLayout) v.findViewById(R.id.sample_layout);
 //
 //            image = (ImageView) v.findViewById(R.id.image);
 //
@@ -67,7 +70,12 @@
 //
 //                                                             int viewType) {
 //
-//        View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
+//        View view = LayoutInflater.from(
+//                parent.getContext()).
+//                inflate(
+//                        R.layout.recycler_view_item,
+//                        parent,
+//                        false);
 //
 //        return new SampleViewHolder(view);
 //
@@ -91,7 +99,7 @@
 //
 //                .into(holder.image);
 //
-//        holder.text.setText(items.get(position).getText());
+//        holder.text.setText(items.get(position).getTitle());
 //
 //
 //    }
@@ -105,4 +113,3 @@
 //    }
 //
 //}
-//

@@ -18,10 +18,14 @@ public class Sample {
     @SerializedName("text")
     private String text;
 
-    public Sample(int id, String createdAt, String text) {
+    @SerializedName("title")
+    private String title;
+
+    public Sample(int id, String createdAt, String text, String title) {
         this.id = id;
         this.createdAt = createdAt;
         this.text = text;
+        this.title = title;
     }
 
     public int getId() {
@@ -46,5 +50,13 @@ public class Sample {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
