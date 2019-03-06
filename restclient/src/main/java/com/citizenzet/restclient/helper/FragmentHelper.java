@@ -13,15 +13,6 @@ import com.citizenzet.restclient.fragment.BaseRestFragment;
 public class FragmentHelper {
 
     public static void setFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
-        switchFragment(activity, fragment, fragmentElementId, true);
-    }
-
-    /**
-     * Переключить фрагмент
-     * @param activity
-     * @param fragment
-     */
-    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
         switchFragment(activity, fragment, fragmentElementId, false);
     }
 
@@ -30,14 +21,23 @@ public class FragmentHelper {
      * @param activity
      * @param fragment
      */
-    private static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isSet){
+    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
+        switchFragment(activity, fragment, fragmentElementId, true);
+    }
+
+    /**
+     * Переключить фрагмент
+     * @param activity
+     * @param fragment
+     */
+    private static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isBack){
         // create a FragmentManager
         FragmentManager fm = activity.getSupportFragmentManager();
         // create a FragmentTransaction to begin the transaction and replace the Fragment
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         // replace the FrameLayout with new Fragment
         fragmentTransaction.replace(fragmentElementId, fragment);
-        if (isSet) {
+        if (isBack) {
             fragmentTransaction.addToBackStack(null);
         }
         fragmentTransaction.commit(); // save the changes
