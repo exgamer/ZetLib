@@ -31,6 +31,10 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
         return binding.getRoot();
     }
 
+    public V getBinding() {
+        return binding;
+    }
+
     public abstract int layout();
 
     public abstract void init();
