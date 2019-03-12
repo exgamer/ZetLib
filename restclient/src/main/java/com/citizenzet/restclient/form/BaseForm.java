@@ -1,5 +1,7 @@
 package com.citizenzet.restclient.form;
 
-public class BaseForm {
+import android.databinding.BaseObservable;
+
+public class BaseForm extends BaseObservable {
 
 }
