@@ -54,7 +54,7 @@ public class BaseForm extends BaseObservable {
         errors = new HashMap<String, String>();
     }
 
-    public <T extends BaseValidator> void  addRule(String field, List<T> validators ){
+    public <T extends BaseValidator> void  addRules(String field, List<T> validators ){
         rules.put(field, validators);
     }
 
