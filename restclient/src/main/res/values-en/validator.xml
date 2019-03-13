@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error">Wrong format</string>
+    <string name="email_error">Wrong format</string>
+    <string name="phone_error">Wrong format</string>
+</resources>
