@@ -11,6 +11,7 @@ import java.util.Map;
 public class BaseForm extends BaseObservable {
 
     private Map<String, String> errors = new HashMap<String, String>();
+    private Map<String, List<? extends BaseValidator>> rules = new HashMap<String, List<? extends BaseValidator>>();
 
     public boolean validate() throws IllegalAccessException {
         clearErrors();
@@ -53,7 +54,11 @@ public class BaseForm extends BaseObservable {
         errors = new HashMap<String, String>();
     }
 
+    public <T extends BaseValidator> void  addValidators(String field, List<T> validators ){
+        rules.put(field, validators);
+    }
+
     public Map<String, List<? extends BaseValidator>> getRules(){
-        return new HashMap<String, List<? extends BaseValidator>>();
+        return rules;
     }
 }
