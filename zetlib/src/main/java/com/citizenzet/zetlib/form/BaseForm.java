@@ -18,7 +18,7 @@ public class BaseForm extends BaseObservable {
     public boolean validate() {
         clearErrors();
         rules = new HashMap<String, List<? extends BaseValidator>>();
-        rules(rules);
+        rules();
         Field[] fields = getClass().getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             String fieldName = fields[i].getName();
@@ -83,5 +83,5 @@ public class BaseForm extends BaseObservable {
     /**
      * Метод для задания правил валидации полей формы
      */
-    public void rules(Map<String, List<? extends BaseValidator>> rules){}
+    public void rules(){}
 }
