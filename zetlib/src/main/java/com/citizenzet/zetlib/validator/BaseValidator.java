@@ -1,7 +1,5 @@
 package com.citizenzet.zetlib.validator;
 
-import android.content.res.Resources;
-
 public abstract class BaseValidator<V> {
     private String errorMessage = "error";
 
@@ -11,8 +9,8 @@ public abstract class BaseValidator<V> {
         return errorMessage;
     }
 
-    public BaseValidator setErrorMessage(int stringId){
-        errorMessage = Resources.getSystem().getString(stringId);
+    public BaseValidator setErrorMessage(String errorMessage){
+        errorMessage = errorMessage;
 
         return this;
     }
