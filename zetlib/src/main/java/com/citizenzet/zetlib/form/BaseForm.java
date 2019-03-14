@@ -1,7 +1,9 @@
 package com.citizenzet.zetlib.form;
 
 import android.databinding.BaseObservable;
+import android.util.Log;
 import com.citizenzet.zetlib.validator.BaseValidator;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,13 +17,19 @@ public class BaseForm extends BaseObservable {
 
     public boolean validate() {
         clearErrors();
-        Field[] fields = getClass().getFields();
+        rules = new HashMap<String, List<? extends BaseValidator>>();
+        rules(rules);
+        Field[] fields = getClass().getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             String fieldName = fields[i].getName();
             if (getRules().containsKey(fieldName)){
+                //TODO удалить
+                Log.e("FIELDNAME" , fieldName);
                 Object value = null;
                 try {
-                    value = fields[i].get(this);
+                    value = FieldUtils.readField(fields[i], this, true);
+                    //TODO удалить
+                    Log.e("value" , String.valueOf(value));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
@@ -31,6 +39,7 @@ public class BaseForm extends BaseObservable {
                     BaseValidator validator = iterator.next();
                     if (validator.validate(value) == false){
                         addError(fieldName, validator.getErrorMessage());
+                        break;
                     }
                 }
             }
@@ -53,6 +62,10 @@ public class BaseForm extends BaseObservable {
 
     public void addError(String field, String msg){
         errors.put(field, msg);
+        //TODO удалить
+        for (Map.Entry<String, String> entry : errors.entrySet()) {
+            Log.e(entry.getKey(), entry.getValue());
+        }
     }
 
     public void clearErrors(){
@@ -66,4 +79,9 @@ public class BaseForm extends BaseObservable {
     public Map<String, List<? extends BaseValidator>> getRules(){
         return rules;
     }
+
+    /**
+     * Метод для задания правил валидации полей формы
+     */
+    public void rules(Map<String, List<? extends BaseValidator>> rules){}
 }
