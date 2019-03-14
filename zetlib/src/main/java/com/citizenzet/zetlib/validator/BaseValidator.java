@@ -11,7 +11,9 @@ public abstract class BaseValidator<V> {
         return errorMessage;
     }
 
-    public void setErrorMessage(int stringId){
+    public BaseValidator setErrorMessage(int stringId){
         errorMessage = Resources.getSystem().getString(stringId);
+
+        return this;
     }
 }
