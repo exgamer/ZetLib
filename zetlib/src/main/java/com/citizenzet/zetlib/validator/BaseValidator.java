@@ -10,7 +10,7 @@ public abstract class BaseValidator<V> {
     }
 
     public BaseValidator setErrorMessage(String errorMessage){
-        errorMessage = errorMessage;
+        this.errorMessage = errorMessage;
 
         return this;
     }
