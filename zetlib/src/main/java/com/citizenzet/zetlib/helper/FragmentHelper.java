@@ -22,7 +22,7 @@ public class FragmentHelper {
      * @param activity
      * @param fragment
      */
-    public static void switchFragmentWithBundle(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, Bundle bundle){
+    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, Bundle bundle){
         switchFragment(activity, fragment, fragmentElementId, true, bundle);
     }
 
