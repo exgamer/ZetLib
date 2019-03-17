@@ -59,9 +59,11 @@ public abstract class BaseRestService<M> {
             @Override
             public void onResponse(Call<M> call, Response<M> response) {
                 Object body = response.body();
+                Object errorBody = response.errorBody();
+                String message = response.message();
                 Headers headers = response.headers();
                 int code = response.code();
-                onCallResponse(code, headers, body);
+                onCallResponse(code, headers, body, errorBody,message);
             }
             @Override
             public void onFailure(Call<M> call, Throwable throwable) {
@@ -97,7 +99,7 @@ public abstract class BaseRestService<M> {
      */
     protected abstract String getBaseUrl();
 
-    protected abstract void onCallResponse(int code, Headers headers, Object body);
+    protected abstract void onCallResponse(int code, Headers headers, Object body, Object errorBody, String message);
     protected abstract void onCallFailure(Throwable throwable);
 
 }

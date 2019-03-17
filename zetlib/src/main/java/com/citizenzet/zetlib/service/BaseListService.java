@@ -15,9 +15,11 @@ public abstract class BaseListService<M> extends BaseRestService<M> {
             @Override
             public void onResponse(Call<M> call, Response<M> response) {
                 Object body = response.body();
+                Object errorBody = response.errorBody();
+                String message = response.message();
                 Headers headers = response.headers();
                 int code = response.code();
-                onCallResponse(code, headers, body);
+                onCallResponse(code, headers, body, errorBody ,message);
             }
             @Override
             public void onFailure(Call<M> call, Throwable throwable) {
