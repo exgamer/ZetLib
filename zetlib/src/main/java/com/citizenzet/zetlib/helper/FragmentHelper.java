@@ -1,6 +1,7 @@
 package com.citizenzet.zetlib.helper;
 
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -13,7 +14,16 @@ import com.citizenzet.zetlib.fragment.BaseRestFragment;
 public class FragmentHelper {
 
     public static void setFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
-        switchFragment(activity, fragment, fragmentElementId, false);
+        switchFragment(activity, fragment, fragmentElementId, false, null);
+    }
+
+    /**
+     * Переключить фрагмент с аргументами
+     * @param activity
+     * @param fragment
+     */
+    public static void switchFragmentWithBundle(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, Bundle bundle){
+        switchFragment(activity, fragment, fragmentElementId, true, bundle);
     }
 
     /**
@@ -22,7 +32,7 @@ public class FragmentHelper {
      * @param fragment
      */
     public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
-        switchFragment(activity, fragment, fragmentElementId, true);
+        switchFragment(activity, fragment, fragmentElementId, true, null);
     }
 
     /**
@@ -30,7 +40,10 @@ public class FragmentHelper {
      * @param activity
      * @param fragment
      */
-    private static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isBack){
+    private static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isBack, Bundle bundle){
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
         // create a FragmentManager
         FragmentManager fm = activity.getSupportFragmentManager();
         // create a FragmentTransaction to begin the transaction and replace the Fragment
