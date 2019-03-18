@@ -6,6 +6,8 @@ import android.util.Log;
 import com.citizenzet.zetlib.activity.BaseRestActivity;
 import com.citizenzet.zetlib.fragment.BaseRestFragment;
 
+import org.json.JSONObject;
+
 import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,7 +62,13 @@ public abstract class BaseRestService<M> {
             @Override
             public void onResponse(Call<M> call, Response<M> response) {
                 Object body = response.body();
-                Object errorBody = response.errorBody();
+                String errorMessage;
+                try {
+                    JSONObject jObjError = new JSONObject(response.errorBody().string());
+                    errorMessage = jObjError.getString("message");
+                } catch (Exception e) {
+                    errorMessage = e.getMessage();
+                }
                 String message = response.message();
                 Headers headers = response.headers();
                 int code = response.code();
@@ -70,13 +78,8 @@ public abstract class BaseRestService<M> {
                 if (message != null) {
                     Log.d("RESPONSE MESSAGE", message);
                 }
-                if (body != null) {
-                    Log.d("RESPONSE BODY ", body.toString());
-                }
-                if (errorBody != null) {
-                    Log.d("RESPONSE ERROR BODY ", errorBody.toString());
-                }
-                onCallResponse(code, headers, body, errorBody,message);
+                Log.d("RESPONSE ERROR MESSAGE ", errorMessage);
+                onCallResponse(code, headers, body, errorMessage, message);
             }
             @Override
             public void onFailure(Call<M> call, Throwable throwable) {
@@ -112,7 +115,7 @@ public abstract class BaseRestService<M> {
      */
     protected abstract String getBaseUrl();
 
-    protected abstract void onCallResponse(int code, Headers headers, Object body, Object errorBody, String message);
+    protected abstract void onCallResponse(int code, Headers headers, Object body, String errorMessage, String message);
     protected abstract void onCallFailure(Throwable throwable);
 
     public void onDestroy(){}
