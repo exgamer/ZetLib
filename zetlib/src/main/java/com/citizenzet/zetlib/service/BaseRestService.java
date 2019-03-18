@@ -1,6 +1,7 @@
 package com.citizenzet.zetlib.service;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.citizenzet.zetlib.activity.BaseRestActivity;
 import com.citizenzet.zetlib.fragment.BaseRestFragment;
@@ -63,6 +64,12 @@ public abstract class BaseRestService<M> {
                 String message = response.message();
                 Headers headers = response.headers();
                 int code = response.code();
+                Log.e("REQUEST BASE URL", getBaseUrl());
+                Log.e("RESPONSE CODE", String.valueOf(code));
+                Log.e("RESPONSE HEADERS", headers.toString());
+                Log.e("RESPONSE MESSAGE", message);
+                Log.e("RESPONSE BODY ", body.toString());
+                Log.e("RESPONSE ERROR BODY ", errorBody.toString());
                 onCallResponse(code, headers, body, errorBody,message);
             }
             @Override
