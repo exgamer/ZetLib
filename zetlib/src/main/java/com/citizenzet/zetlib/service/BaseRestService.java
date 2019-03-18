@@ -102,6 +102,6 @@ public abstract class BaseRestService<M> {
     protected abstract void onCallResponse(int code, Headers headers, Object body, Object errorBody, String message);
     protected abstract void onCallFailure(Throwable throwable);
 
-    protected void onDestroy(){}
+    public void onDestroy(){}
 
 }
