@@ -13,6 +13,7 @@ public class ActivityHelper {
     public static void goToActivity(Activity activity, final Class<? extends Activity> activityToGo){
         Intent myIntent = new Intent(activity, activityToGo);
         activity.startActivity(myIntent);
+        activity.finish();
     }
 
     public static void hideKeyboard(Activity activity) {
