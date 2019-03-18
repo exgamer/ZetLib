@@ -64,12 +64,18 @@ public abstract class BaseRestService<M> {
                 String message = response.message();
                 Headers headers = response.headers();
                 int code = response.code();
-                Log.e("REQUEST BASE URL", getBaseUrl());
-                Log.e("RESPONSE CODE", String.valueOf(code));
-                Log.e("RESPONSE HEADERS", headers.toString());
-                Log.e("RESPONSE MESSAGE", message);
-                Log.e("RESPONSE BODY ", body.toString());
-                Log.e("RESPONSE ERROR BODY ", errorBody.toString());
+                Log.d("REQUEST BASE URL", getBaseUrl());
+                Log.d("RESPONSE CODE", String.valueOf(code));
+                Log.d("RESPONSE HEADERS", headers.toString());
+                if (message != null) {
+                    Log.d("RESPONSE MESSAGE", message);
+                }
+                if (body != null) {
+                    Log.d("RESPONSE BODY ", body.toString());
+                }
+                if (errorBody != null) {
+                    Log.d("RESPONSE ERROR BODY ", errorBody.toString());
+                }
                 onCallResponse(code, headers, body, errorBody,message);
             }
             @Override
