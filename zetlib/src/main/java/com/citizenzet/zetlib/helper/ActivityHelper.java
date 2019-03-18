@@ -11,9 +11,15 @@ import android.view.inputmethod.InputMethodManager;
 public class ActivityHelper {
 
     public static void goToActivity(Activity activity, final Class<? extends Activity> activityToGo){
+        goToActivity(activity, activityToGo, false);
+    }
+
+    public static void goToActivity(Activity activity, final Class<? extends Activity> activityToGo, boolean finish){
         Intent myIntent = new Intent(activity, activityToGo);
         activity.startActivity(myIntent);
-        activity.finish();
+        if (finish) {
+            activity.finish();
+        }
     }
 
     public static void hideKeyboard(Activity activity) {
