@@ -35,6 +35,7 @@ public class FragmentHelper {
         if (isBack) {
             fragmentTransaction.addToBackStack(backStackKey);
         }else{
+            fm.popBackStack();
             fragmentTransaction.disallowAddToBackStack();
         }
         fragmentTransaction.commit(); // save the changes
