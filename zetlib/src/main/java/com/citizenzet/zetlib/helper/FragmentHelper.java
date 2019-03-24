@@ -18,24 +18,6 @@ public class FragmentHelper {
     }
 
     /**
-     * Переключить фрагмент с аргументами
-     * @param activity
-     * @param fragment
-     */
-    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, String backStackKey, Bundle bundle){
-        switchFragment(activity, fragment, fragmentElementId, backStackKey, bundle);
-    }
-
-    /**
-     * Переключить фрагмент
-     * @param activity
-     * @param fragment
-     */
-    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, String backStackKey){
-        switchFragment(activity, fragment, fragmentElementId, true, backStackKey,  null);
-    }
-
-    /**
      * Переключить фрагмент
      * @param activity
      * @param fragment
