@@ -50,7 +50,9 @@ public class FragmentHelper {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         // replace the FrameLayout with new Fragment
         fragmentTransaction.replace(fragmentElementId, fragment);
-        if (isBack == false) {
+        if (isBack) {
+            fragmentTransaction.addToBackStack(null);
+        }else{
             fragmentTransaction.disallowAddToBackStack();
         }
         fragmentTransaction.commit(); // save the changes
