@@ -14,7 +14,7 @@ import com.citizenzet.zetlib.fragment.BaseRestFragment;
 public class FragmentHelper {
 
     public static void setFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
-        switchFragment(activity, fragment, fragmentElementId, true, null, null);
+        switchFragment(activity, fragment, fragmentElementId, false, null, null);
     }
 
     /**
