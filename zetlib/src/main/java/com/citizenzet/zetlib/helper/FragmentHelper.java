@@ -40,7 +40,7 @@ public class FragmentHelper {
      * @param activity
      * @param fragment
      */
-    private static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isBack, Bundle bundle){
+    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isBack, Bundle bundle){
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
