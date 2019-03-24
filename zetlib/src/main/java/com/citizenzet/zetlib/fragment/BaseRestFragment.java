@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.citizenzet.zetlib.helper.ActivityHelper;
+
 public abstract class BaseRestFragment<V extends ViewDataBinding,T extends FragmentActivity> extends Fragment {
     protected T activity;
     protected V binding;
@@ -27,6 +29,7 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding= DataBindingUtil.inflate(inflater, layout(), container, false);
+        ActivityHelper.hideKeyboard(getActivity());
         afterBinding();
         return binding.getRoot();
     }
