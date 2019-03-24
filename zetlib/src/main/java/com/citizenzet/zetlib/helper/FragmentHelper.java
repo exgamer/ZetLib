@@ -14,7 +14,7 @@ import com.citizenzet.zetlib.fragment.BaseRestFragment;
 public class FragmentHelper {
 
     public static void setFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
-        switchFragment(activity, fragment, fragmentElementId, false, null);
+        switchFragment(activity, fragment, fragmentElementId, false, null, null);
     }
 
     /**
@@ -22,8 +22,8 @@ public class FragmentHelper {
      * @param activity
      * @param fragment
      */
-    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, Bundle bundle){
-        switchFragment(activity, fragment, fragmentElementId, true, bundle);
+    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, String backStackKey, Bundle bundle){
+        switchFragment(activity, fragment, fragmentElementId, backStackKey, bundle);
     }
 
     /**
@@ -31,8 +31,8 @@ public class FragmentHelper {
      * @param activity
      * @param fragment
      */
-    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
-        switchFragment(activity, fragment, fragmentElementId, true, null);
+    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, String backStackKey){
+        switchFragment(activity, fragment, fragmentElementId, true, backStackKey,  null);
     }
 
     /**
@@ -40,7 +40,7 @@ public class FragmentHelper {
      * @param activity
      * @param fragment
      */
-    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isBack, Bundle bundle){
+    public static void switchFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId, boolean isBack, String backStackKey, Bundle bundle){
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
@@ -51,7 +51,7 @@ public class FragmentHelper {
         // replace the FrameLayout with new Fragment
         fragmentTransaction.replace(fragmentElementId, fragment);
         if (isBack) {
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.addToBackStack(backStackKey);
         }else{
             fragmentTransaction.disallowAddToBackStack();
         }
