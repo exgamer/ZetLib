@@ -2,6 +2,7 @@ package com.citizenzet.zetlib.helper;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -12,10 +13,6 @@ import com.citizenzet.zetlib.fragment.BaseRestFragment;
  * Вспомогательные методы для работы с фрагментами
  */
 public class FragmentHelper {
-
-    public static void setFragment(BaseRestActivity activity, BaseRestFragment fragment, int fragmentElementId){
-        switchFragment(activity, fragment, fragmentElementId, false, null, null);
-    }
 
     /**
      * Переключить фрагмент
@@ -35,9 +32,16 @@ public class FragmentHelper {
         if (isBack) {
             fragmentTransaction.addToBackStack(backStackKey);
         }else{
-//            fm.popBackStack();
+            fm.popBackStack();
             fragmentTransaction.disallowAddToBackStack();
         }
         fragmentTransaction.commit(); // save the changes
+    }
+
+    public void clearFragmentManager(BaseRestActivity activity){
+        activity.getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        for (Fragment fragment:activity.getSupportFragmentManager().getFragments()) {
+            activity.getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
     }
 }
