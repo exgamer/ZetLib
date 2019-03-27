@@ -38,7 +38,7 @@ public class FragmentHelper {
         fragmentTransaction.commit(); // save the changes
     }
 
-    public void clearFragmentManager(BaseRestActivity activity){
+    public static void clearFragmentManager(BaseRestActivity activity){
         activity.getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         for (Fragment fragment:activity.getSupportFragmentManager().getFragments()) {
             activity.getSupportFragmentManager().beginTransaction().remove(fragment).commit();
