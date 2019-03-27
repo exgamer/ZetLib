@@ -32,13 +32,12 @@ public class FragmentHelper {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         // replace the FrameLayout with new Fragment
         fragmentTransaction.replace(fragmentElementId, fragment);
-        fragmentTransaction.addToBackStack(null);
-//        if (isBack) {
-//            fragmentTransaction.addToBackStack(backStackKey);
-//        }else{
-////            fm.popBackStack();
-//            fragmentTransaction.disallowAddToBackStack();
-//        }
+        if (isBack) {
+            fragmentTransaction.addToBackStack(backStackKey);
+        }else{
+//            fm.popBackStack();
+            fragmentTransaction.disallowAddToBackStack();
+        }
         fragmentTransaction.commit(); // save the changes
     }
 }
