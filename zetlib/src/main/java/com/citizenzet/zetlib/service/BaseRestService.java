@@ -50,6 +50,8 @@ public abstract class BaseRestService<M> {
         setFragment(fragment);
     };
 
+    public void onResume(){}
+
     public void beforeRequest(){
 
     }
