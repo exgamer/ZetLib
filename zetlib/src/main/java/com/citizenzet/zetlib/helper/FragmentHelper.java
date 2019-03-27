@@ -31,11 +31,11 @@ public class FragmentHelper {
         // create a FragmentTransaction to begin the transaction and replace the Fragment
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         // replace the FrameLayout with new Fragment
-        fragmentTransaction.add(fragmentElementId, fragment);
+        fragmentTransaction.replace(fragmentElementId, fragment);
         if (isBack) {
             fragmentTransaction.addToBackStack(backStackKey);
         }else{
-            fm.popBackStack();
+//            fm.popBackStack();
             fragmentTransaction.disallowAddToBackStack();
         }
         fragmentTransaction.commit(); // save the changes

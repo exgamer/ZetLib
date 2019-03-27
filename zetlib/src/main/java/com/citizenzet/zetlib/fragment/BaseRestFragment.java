@@ -17,6 +17,7 @@ import com.citizenzet.zetlib.helper.ActivityHelper;
 public abstract class BaseRestFragment<V extends ViewDataBinding,T extends FragmentActivity> extends Fragment {
     protected T activity;
     protected V binding;
+    protected View _rootView;
 
     @Override
     public void onAttach(Context context) {
@@ -28,10 +29,14 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding= DataBindingUtil.inflate(inflater, layout(), container, false);
-        ActivityHelper.hideKeyboard(getActivity());
-        afterBinding();
-        return binding.getRoot();
+        if (this._rootView == null) {
+            binding= DataBindingUtil.inflate(inflater, layout(), container, false);
+            ActivityHelper.hideKeyboard(getActivity());
+            afterBinding();
+            this._rootView = binding.getRoot();
+        }
+
+        return this._rootView;
     }
 
     public V getBinding() {
