@@ -30,6 +30,7 @@ public class FragmentHelper {
         // replace the FrameLayout with new Fragment
         fragmentTransaction.replace(fragmentElementId, fragment);
         if (isBack) {
+            clearFragmentManager(activity);
             fragmentTransaction.addToBackStack(backStackKey);
         }else{
             fragmentTransaction.disallowAddToBackStack();
