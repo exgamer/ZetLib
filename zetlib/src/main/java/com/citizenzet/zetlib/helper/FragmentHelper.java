@@ -31,7 +31,7 @@ public class FragmentHelper {
         // create a FragmentTransaction to begin the transaction and replace the Fragment
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         // replace the FrameLayout with new Fragment
-        fragmentTransaction.replace(fragmentElementId, fragment);
+        fragmentTransaction.add(fragmentElementId, fragment);
         if (isBack) {
             fragmentTransaction.addToBackStack(backStackKey);
         }else{
