@@ -11,12 +11,12 @@ public class NotificationHelper {
     }
 
     public static void snack(View view, String message, View.OnClickListener onClickListener){
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE)
                 .setAction("Action", onClickListener).show();
     }
 
     public static void snack(View view, String message){
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE)
                 .setAction("Action", null).show();
     }
 }
