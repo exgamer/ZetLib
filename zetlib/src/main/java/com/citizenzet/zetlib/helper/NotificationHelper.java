@@ -10,9 +10,9 @@ public class NotificationHelper {
         Toast.makeText(activity.getApplicationContext(),message,Toast.LENGTH_LONG).show();
     }
 
-    public static void snack(View view, String message, View.OnClickListener onClickListener){
+    public static void snack(View view, String message, String actionButtonCaption, View.OnClickListener onClickListener){
         Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE)
-                .setAction("Action", onClickListener).show();
+                .setAction(actionButtonCaption, onClickListener).show();
     }
 
     public static void snack(View view, String message){

@@ -83,7 +83,7 @@ public abstract class BaseRestService<M> {
                 view = getFragment().getView();
             }
 
-            NotificationHelper.snack(view, "No internet connection",getOnNoInternetSnackClickListener());
+            NotificationHelper.snack(view, "No internet connection","Try again", getOnNoInternetSnackClickListener());
             return false;
         }
         return true;
