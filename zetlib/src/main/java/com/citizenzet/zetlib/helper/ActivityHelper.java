@@ -5,18 +5,23 @@ import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.citizenzet.zetlib.R;
+
 /**
  * Вспомогательные методы для работы с activity
  */
 public class ActivityHelper {
 
     public static void goToActivity(Activity activity, final Class<? extends Activity> activityToGo){
-        goToActivity(activity, activityToGo, false);
+        goToActivity(activity, activityToGo, false, 0, 0);
     }
 
-    public static void goToActivity(Activity activity, final Class<? extends Activity> activityToGo, boolean finish){
+    public static void goToActivity(Activity activity, final Class<? extends Activity> activityToGo, boolean finish, int animFrom, int animTo){
         Intent myIntent = new Intent(activity, activityToGo);
         activity.startActivity(myIntent);
+        if (animFrom > 0 && animTo >0){
+            activity.overridePendingTransition(animFrom, animTo);
+        }
         if (finish) {
             activity.finish();
         }
