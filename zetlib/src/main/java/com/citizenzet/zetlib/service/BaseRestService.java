@@ -2,13 +2,19 @@ package com.citizenzet.zetlib.service;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 
 import com.citizenzet.zetlib.activity.BaseRestActivity;
+import com.citizenzet.zetlib.application.App;
 import com.citizenzet.zetlib.fragment.BaseRestFragment;
+import com.citizenzet.zetlib.helper.NotificationHelper;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.Headers;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +62,40 @@ public abstract class BaseRestService<M> {
 
     }
 
+    protected void onNoInternetSnackClick(View v){
+
+    }
+
+    protected View.OnClickListener getOnNoInternetSnackClickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNoInternetSnackClick(v);
+            }
+        };
+    }
+
+    protected boolean isNetworkAvailable(){
+        if (App.isNetworkAvailable() == false){
+            View view = null;
+            if (getActivity() != null){
+                View currentFocus = getActivity().getWindow().getCurrentFocus();
+                if (currentFocus != null)
+                    view = currentFocus.getRootView();
+            }else{
+                view = getFragment().getView();
+            }
+
+            NotificationHelper.snack(view, "No internet connection","Try again", getOnNoInternetSnackClickListener());
+            return false;
+        }
+        return true;
+    }
+
     public void request(){
+        if (isNetworkAvailable() == false){
+            return;
+        }
         beforeRequest();
         Retrofit retrofit = getBuilder();
         Call<M> call = getCaller(retrofit);
@@ -105,6 +144,11 @@ public abstract class BaseRestService<M> {
      */
     protected Retrofit getBuilder()  {
         return new Retrofit.Builder()
+                .client(new OkHttpClient.Builder()
+                        .connectTimeout(1, TimeUnit.MINUTES)
+                        .writeTimeout(1, TimeUnit.MINUTES)
+                        .readTimeout(1, TimeUnit.MINUTES)
+                        .build())
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

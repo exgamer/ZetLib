@@ -2,6 +2,9 @@ package com.citizenzet.zetlib.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.util.Locale;
 
 /**
@@ -54,6 +57,13 @@ public class App extends Application {
             return null;
         }
         return App.context.getResources().getConfiguration().locale.getLanguage();
+    }
+
+    public static boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }
