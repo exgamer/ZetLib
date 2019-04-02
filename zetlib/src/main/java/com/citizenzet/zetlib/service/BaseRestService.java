@@ -76,7 +76,7 @@ public abstract class BaseRestService<M> {
     }
 
     protected boolean isNetworkAvailable(){
-        if (App.isNetworkAvailable() == false){
+        if (App.isNetworkAvailable() == false || App.isOnline() == false) {
             View view = null;
             if (getActivity() != null){
                 View currentFocus = getActivity().getWindow().getCurrentFocus();
