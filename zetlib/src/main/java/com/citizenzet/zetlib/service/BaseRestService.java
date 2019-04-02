@@ -99,6 +99,11 @@ public abstract class BaseRestService<M> {
         beforeRequest();
         Retrofit retrofit = getBuilder();
         Call<M> call = getCaller(retrofit);
+        initCall(call);
+        afterRequest();
+    }
+
+    protected void initCall(Call<M> call){
         call.enqueue(new Callback<M>() {
             @Override
             public void onResponse(Call<M> call, Response<M> response) {
@@ -127,7 +132,6 @@ public abstract class BaseRestService<M> {
                 onCallFailure(throwable);
             }
         });
-        afterRequest();
     }
 
     public void afterRequest(){
