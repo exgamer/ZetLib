@@ -2,8 +2,10 @@ package com.citizenzet.zetlib.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 
 import java.util.Locale;
 
@@ -77,5 +79,17 @@ public class App extends Application {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static boolean isNightModeEnabled() {
+        SharedPreferences mPrefs =  PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
+        return mPrefs.getBoolean("NIGHT_MODE", false);
+    }
+
+    public static void setIsNightModeEnabled(boolean isNightModeEnabled) {
+        SharedPreferences mPrefs =  PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putBoolean("NIGHT_MODE", isNightModeEnabled);
+        editor.commit();
     }
 }
