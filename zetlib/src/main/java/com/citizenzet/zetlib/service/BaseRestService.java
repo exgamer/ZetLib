@@ -24,6 +24,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class BaseRestService<M> {
     protected BaseRestFragment fragment;
     protected BaseRestActivity activity;
+    /**
+     * Так делаем чтобы фрагмент не загружался пока он невидим в табах
+     */
+    private boolean isInited = false;
 
     public void setFragment(BaseRestFragment fragment){
         this.fragment = fragment;
@@ -49,11 +53,19 @@ public abstract class BaseRestService<M> {
     }
 
     public void init(BaseRestActivity activity){
+        if (isInited()){
+            return;
+        }
         setActivity(activity);
+        setInited(true);
     };
 
     public void init(BaseRestFragment fragment){
+        if (isInited()){
+            return;
+        }
         setFragment(fragment);
+        setInited(true);
     };
 
     public void onResume(){}
@@ -170,4 +182,11 @@ public abstract class BaseRestService<M> {
 
     public void onDestroy(){}
 
+    public boolean isInited() {
+        return isInited;
+    }
+
+    public void setInited(boolean inited) {
+        isInited = inited;
+    }
 }

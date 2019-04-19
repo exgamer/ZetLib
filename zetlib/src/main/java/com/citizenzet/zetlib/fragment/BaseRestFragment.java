@@ -50,4 +50,19 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
     public void afterBinding(){
 
     }
+
+    @Override
+    public void setUserVisibleHint(boolean visible)
+    {
+        super.setUserVisibleHint(visible);
+        /**
+         * Так делаем чтобы фрагмент не загружался пока он невидим в табах
+         */
+        if (visible && isResumed())
+        {
+            //Only manually call onResume if fragment is already visible
+            //Otherwise allow natural fragment lifecycle to call onResume
+            onResume();
+        }
+    }
 }
