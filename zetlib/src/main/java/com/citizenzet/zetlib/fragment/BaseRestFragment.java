@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.citizenzet.zetlib.application.App;
 import com.citizenzet.zetlib.helper.ActivityHelper;
 
 public abstract class BaseRestFragment<V extends ViewDataBinding,T extends FragmentActivity> extends Fragment {
@@ -49,6 +51,16 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
 
     public void afterBinding(){
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (App.isNightModeEnabled()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     @Override
