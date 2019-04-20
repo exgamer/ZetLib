@@ -29,6 +29,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     //utility for work with file
     implementation 'org.apache.commons:commons-lang3:3.6'

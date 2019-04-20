@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -159,11 +160,15 @@ public abstract class BaseRestService<M> {
      * @return
      */
     protected Retrofit getBuilder()  {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         return new Retrofit.Builder()
                 .client(new OkHttpClient.Builder()
                         .connectTimeout(1, TimeUnit.MINUTES)
                         .writeTimeout(1, TimeUnit.MINUTES)
                         .readTimeout(1, TimeUnit.MINUTES)
+                        .addInterceptor(interceptor)
                         .build())
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
