@@ -106,9 +106,9 @@ public abstract class BaseRestService<M> {
     }
 
     public void request(){
-        if (isNetworkAvailable() == false){
-            return;
-        }
+//        if (isNetworkAvailable() == false){
+//            return;
+//        }
         beforeRequest();
         Retrofit retrofit = getBuilder();
         Call<M> call = getCaller(retrofit);
