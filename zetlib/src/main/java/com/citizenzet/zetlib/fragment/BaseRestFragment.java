@@ -18,6 +18,7 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
     protected T activity;
     protected V binding;
     protected View _rootView;
+    protected String toolbarTitle;
 
     @Override
     public void onAttach(Context context) {
@@ -64,5 +65,13 @@ public abstract class BaseRestFragment<V extends ViewDataBinding,T extends Fragm
             //Otherwise allow natural fragment lifecycle to call onResume
             onResume();
         }
+    }
+
+    public String getToolbarTitle() {
+        return toolbarTitle;
+    }
+
+    public void setToolbarTitle(String toolbarTitle) {
+        this.toolbarTitle = toolbarTitle;
     }
 }
