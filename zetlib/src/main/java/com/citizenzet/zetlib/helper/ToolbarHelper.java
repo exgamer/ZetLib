@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.Toolbar;
 
 public class ToolbarHelper {
-
+    private static String prevToolbarTitle;
 
     public static void setNavigationIcon(Activity activity, int toolbarId, int drawable, int width, int height){
         Toolbar toolbar = (Toolbar) activity.findViewById(toolbarId);
@@ -19,6 +19,17 @@ public class ToolbarHelper {
 
     public static void setTitle(Activity activity, int toolbarId, String text){
         Toolbar toolbar = (Toolbar) activity.findViewById(toolbarId);
+        prevToolbarTitle = (String) toolbar.getTitle();
         toolbar.setTitle(text);
     }
+
+    public static void toPrevTitle(Activity activity, int toolbarId){
+        if (prevToolbarTitle.equals(null)){
+            return;
+        }
+        Toolbar toolbar = (Toolbar) activity.findViewById(toolbarId);
+        toolbar.setTitle(prevToolbarTitle);
+    }
+
+
 }
