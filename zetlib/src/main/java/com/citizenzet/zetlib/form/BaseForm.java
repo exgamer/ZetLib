@@ -23,13 +23,9 @@ public class BaseForm extends BaseObservable {
         for (int i = 0; i < fields.length; i++) {
             String fieldName = fields[i].getName();
             if (getRules().containsKey(fieldName)){
-                //TODO удалить
-                Log.e("FIELDNAME" , fieldName);
                 Object value = null;
                 try {
                     value = FieldUtils.readField(fields[i], this, true);
-                    //TODO удалить
-                    Log.e("value" , String.valueOf(value));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
@@ -62,10 +58,6 @@ public class BaseForm extends BaseObservable {
 
     public void addError(String field, String msg){
         errors.put(field, msg);
-        //TODO удалить
-        for (Map.Entry<String, String> entry : errors.entrySet()) {
-            Log.e(entry.getKey(), entry.getValue());
-        }
     }
 
     public void clearErrors(){

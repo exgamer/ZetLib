@@ -131,13 +131,6 @@ public abstract class BaseRestService<M> {
                 String message = response.message();
                 Headers headers = response.headers();
                 int code = response.code();
-                Log.d("REQUEST BASE URL", getBaseUrl());
-                Log.d("RESPONSE CODE", String.valueOf(code));
-                Log.d("RESPONSE HEADERS", headers.toString());
-                if (message != null) {
-                    Log.d("RESPONSE MESSAGE", message);
-                }
-                Log.d("RESPONSE ERROR MESSAGE ", errorMessage);
                 onCallResponse(code, headers, body, errorMessage, message);
             }
             @Override
