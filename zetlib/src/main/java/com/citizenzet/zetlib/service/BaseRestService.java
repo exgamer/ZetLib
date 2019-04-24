@@ -161,7 +161,7 @@ public abstract class BaseRestService<M> {
                         .connectTimeout(1, TimeUnit.MINUTES)
                         .writeTimeout(1, TimeUnit.MINUTES)
                         .readTimeout(1, TimeUnit.MINUTES)
-                        .addInterceptor(interceptor)
+//                        .addInterceptor(interceptor)
                         .build())
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
