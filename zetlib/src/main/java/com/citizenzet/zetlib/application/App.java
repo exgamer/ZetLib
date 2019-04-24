@@ -19,7 +19,12 @@ import java.util.Locale;
  */
 public class App extends Application {
 
-    protected static Context context;
+    private static Context context;
+
+    public void onCreate() {
+        super.onCreate();
+        App.context = getApplicationContext();
+    }
 
     public static final  int getResColor(int color){
         return context.getResources().getColor(color);
