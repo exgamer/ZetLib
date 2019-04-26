@@ -19,7 +19,7 @@ import java.util.Locale;
  */
 public class App extends Application {
 
-    private static Context context;
+    protected static Context context;
 
     public void onCreate() {
         super.onCreate();
