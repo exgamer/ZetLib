@@ -17,7 +17,7 @@ public class RVEmptyObserver extends RecyclerView.AdapterDataObserver {
     private RecyclerView recyclerView;
 
     /**
-     * Constructor to set an Empty View for the RV
+     * Constructor to set an Loading View for the lv
      */
     public RVEmptyObserver(RecyclerView rv, View ev, View lv) {
         this.recyclerView = rv;

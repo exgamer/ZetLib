@@ -153,19 +153,26 @@ public abstract class BaseRestService<M> {
      * @return
      */
     protected Retrofit getBuilder()  {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .writeTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.MINUTES);
+        extendHttpBuilder(builder);
+        OkHttpClient client = builder.build();
 
         return new Retrofit.Builder()
-                .client(new OkHttpClient.Builder()
-                        .connectTimeout(1, TimeUnit.MINUTES)
-                        .writeTimeout(1, TimeUnit.MINUTES)
-                        .readTimeout(1, TimeUnit.MINUTES)
-                        .addInterceptor(interceptor)
-                        .build())
+                .client(client)
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    protected void extendHttpBuilder(OkHttpClient.Builder builder) {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(interceptor);
     }
 
     /**
