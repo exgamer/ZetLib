@@ -50,7 +50,7 @@ public abstract class BaseFirebaseMessagingService extends com.google.firebase.m
 
 
 
-//    protected void setupNotificationBuilder(NotificationCompat.Builder mBuilder){
+//    protected void setupNotificationBuilder(NotificationCompat.Builder mBuilder, Map<String, String> data){
 //        mBuilder.setSmallIcon(R.mipmap.ic_launcher)
 //        .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
 //        .setAutoCancel(true)
@@ -61,12 +61,12 @@ public abstract class BaseFirebaseMessagingService extends com.google.firebase.m
 //        .setDefaults(Notification.DEFAULT_ALL)
 //        .setContentText(msg);
 //    }
-    protected abstract void setupNotificationBuilder(NotificationCompat.Builder mBuilder);
+    protected abstract void setupNotificationBuilder(NotificationCompat.Builder mBuilder, Map<String, String> data);
 
-//    protected void setupNotification(NotificationCompat.BigTextStyle notification){
+//    protected void setupNotification(NotificationCompat.BigTextStyle notification, Map<String, String> data){
 //        notification.bigText(msg).build();
 //    }
-    protected abstract void setupNotification(NotificationCompat.BigTextStyle notification);
+    protected abstract void setupNotification(NotificationCompat.BigTextStyle notification, Map<String, String> data);
 
 //
 //    protected void getResultIntent(){
@@ -82,13 +82,13 @@ public abstract class BaseFirebaseMessagingService extends com.google.firebase.m
             setupChannels();
         }
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, ADMIN_CHANNEL_ID);
-        setupNotificationBuilder(mBuilder);
+        setupNotificationBuilder(mBuilder, data);
         Intent resultIntent = getResultIntent();
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1,
                 resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pendingIntent);
         NotificationCompat.BigTextStyle notificationBuild = new NotificationCompat.BigTextStyle(mBuilder);
-        setupNotification(notificationBuild);
+        setupNotification(notificationBuild, data);
         Notification notification = notificationBuild.build();
         mNotificationManager.notify(0, notification);
     }
