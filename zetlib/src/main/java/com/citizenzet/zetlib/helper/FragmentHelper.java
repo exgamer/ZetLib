@@ -35,7 +35,7 @@ public class FragmentHelper {
         }else{
             fragmentTransaction.disallowAddToBackStack();
         }
-        fragmentTransaction.commit(); // save the changes
+        fragmentTransaction.commitAllowingStateLoss(); // save the changes
     }
 
     public static void clearFragmentManager(BaseRestActivity activity){
