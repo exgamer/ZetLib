@@ -99,10 +99,11 @@ public abstract class BaseFirebaseMessagingService extends com.google.firebase.m
         String adminChannelDescription = "admin";
 
         NotificationChannel adminChannel;
-        adminChannel = new NotificationChannel(ADMIN_CHANNEL_ID, adminChannelName, NotificationManager.IMPORTANCE_LOW);
+        adminChannel = new NotificationChannel(ADMIN_CHANNEL_ID, adminChannelName, NotificationManager.IMPORTANCE_DEFAULT);
         adminChannel.setDescription(adminChannelDescription);
         adminChannel.enableLights(true);
         adminChannel.setLightColor(Color.RED);
+        adminChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
         adminChannel.enableVibration(true);
         if (mNotificationManager != null) {
             mNotificationManager.createNotificationChannel(adminChannel);
