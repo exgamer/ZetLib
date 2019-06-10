@@ -77,10 +77,6 @@ public abstract class BaseFirebaseMessagingService extends com.google.firebase.m
     protected abstract Intent getResultIntent();
 
     private void notify(Map<String, String> data) {
-       notify(data, 0);
-    }
-
-    private void notify(Map<String, String> data, Integer id) {
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         //Setting up Notification channels for android O and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -95,7 +91,11 @@ public abstract class BaseFirebaseMessagingService extends com.google.firebase.m
         NotificationCompat.BigTextStyle notificationBuild = new NotificationCompat.BigTextStyle(mBuilder);
         setupNotification(notificationBuild, data);
         Notification notification = notificationBuild.build();
-        mNotificationManager.notify(id, notification);
+        mNotificationManager.notify(getNotificationId(), notification);
+    }
+
+    protected Integer getNotificationId(){
+        return 0;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
