@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.PowerManager;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import com.google.firebase.messaging.RemoteMessage;
@@ -107,6 +108,19 @@ public abstract class BaseFirebaseMessagingService extends com.google.firebase.m
         adminChannel.enableVibration(true);
         if (mNotificationManager != null) {
             mNotificationManager.createNotificationChannel(adminChannel);
+        }
+    }
+
+    protected void wakeUp(String tag){
+        PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn = pm.isScreenOn();
+        if(isScreenOn==false)
+        {
+            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK |PowerManager.ACQUIRE_CAUSES_WAKEUP |PowerManager.ON_AFTER_RELEASE, tag);
+            wl.acquire(10000);
+            PowerManager.WakeLock wl_cpu = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, tag);
+
+            wl_cpu.acquire(10000);
         }
     }
 }
