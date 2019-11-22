@@ -40,7 +40,7 @@ dependencies {
     //utility for work with file
     implementation 'org.apache.commons:commons-lang3:3.6'
     //Add Firebase Core//
-    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
     //Add FCM//
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
 }
